@@ -2,7 +2,7 @@
   border: none;
   font-family: "Permanent Marker", cursive;
   font-size: 25px;
-  margin-top: 10px;
+  margin-top: 20px;
   background: none;
 }
 
@@ -26,4 +26,11 @@
   grid-template-columns: repeat(3, auto);
   width: 225px;
   margin: auto;
+}
+
+#scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 10px;
 }
