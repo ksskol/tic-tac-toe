@@ -8,13 +8,14 @@ export default function TicTacToe() {
   let [xWins, setXWins] = useState(0);
   let [oWins, setOWins] = useState(0);
   let [ties, setTies] = useState(0);
+  let [currentPlayer, setCurrentPlayer] = useState("X");
   let titleRef = useRef(null);
 
   const toggle = (e, num) => {
     if (lock || data[num] !== "") {
       return;
     }
-    if (count % 2 === 0) {
+    if (currentPlayer === "X") {
       e.target.innerHTML = "X";
       data[num] = "X";
     } else {
@@ -23,6 +24,7 @@ export default function TicTacToe() {
     }
     setCount(count + 1);
     checkWin();
+    setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
   };
 
   const checkWin = () => {
@@ -72,6 +74,7 @@ export default function TicTacToe() {
     data = ["", "", "", "", "", "", "", "", ""];
     setCount(0);
     setLock(false);
+    setCurrentPlayer("X");
     Array.from(document.getElementsByClassName("board")).forEach((board) => {
       board.innerHTML = "";
     });
@@ -92,10 +95,8 @@ export default function TicTacToe() {
       <h1 className="title" ref={titleRef}>
         Tic Tac Toe Game
       </h1>
-      <div id="scoreboard">
-        <p>X Wins: {xWins}</p>
-        <p>Ties: {ties}</p>
-        <p>O Wins: {oWins}</p>
+      <div id="currentPlayer">
+        <p>Current Player: {currentPlayer}</p>
       </div>
       <div id="boardContainer">
         <div className="board" onClick={(e) => toggle(e, 0)}></div>
@@ -107,6 +108,11 @@ export default function TicTacToe() {
         <div className="board" onClick={(e) => toggle(e, 6)}></div>
         <div className="board" onClick={(e) => toggle(e, 7)}></div>
         <div className="board" onClick={(e) => toggle(e, 8)}></div>
+      </div>
+      <div id="scoreboard">
+        <p>X Wins: {xWins}</p>
+        <p>Ties: {ties}</p>
+        <p>O Wins: {oWins}</p>
       </div>
       <button className="reset" onClick={handleManualReset}>
         Reset game
